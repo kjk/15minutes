@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonStartOk = new System.Windows.Forms.Button();
             this.label5min = new System.Windows.Forms.Label();
             this.label15min = new System.Windows.Forms.Label();
@@ -118,6 +119,7 @@
             this.Controls.Add(this.label15min);
             this.Controls.Add(this.label5min);
             this.Controls.Add(this.buttonStartOk);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(298, 152);
             this.MinimumSize = new System.Drawing.Size(298, 152);
             this.Name = "FormMain";
