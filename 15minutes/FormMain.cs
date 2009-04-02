@@ -50,8 +50,49 @@ namespace _15minutes
             notifyIcon.Icon = this.Icon;
             notifyIcon.DoubleClick += new EventHandler(NotifyIcon_ClickOrDoubleClick);
             notifyIcon.Click += new EventHandler(NotifyIcon_ClickOrDoubleClick);
-
+            MyLayout();
             SwitchToSettingTimeState();
+        }
+
+        // we have to manually layout things because layout generated in
+        // the GUI designer is different on XP vs. Windows 7
+        protected void MyLayout()
+        {
+            this.SuspendLayout();
+            Rectangle cr = this.ClientRectangle;
+            int dx = cr.Width;
+            int dy = cr.Height;
+            int buttonDy = this.buttonStartOk.Height;
+            Debug.Assert(buttonDy == this.buttonPauseResume.Height);
+            Debug.Assert(buttonDy == this.buttonStop.Height);
+            this.buttonStartOk.Dock = DockStyle.None;
+            this.buttonStartOk.Location = new Point(0, dy - buttonDy);
+            this.buttonStartOk.Size = new Size(dx, buttonDy);
+
+            this.buttonStop.Location = new Point(0, dy - buttonDy);
+            this.buttonStop.Size = new Size(dx / 2, buttonDy);
+
+            this.buttonPauseResume.Location = new Point(dx / 2, dy - buttonDy);
+            this.buttonPauseResume.Size = new Size(dx / 2, buttonDy);
+
+            int txtDx = this.labelWebSite.Width;
+            int txtDy = this.labelWebSite.Height;
+            Debug.Assert(txtDy == this.label5min.Height);
+            Debug.Assert(txtDy == this.label15min.Height);
+            Debug.Assert(txtDy == this.label30min.Height);
+
+            this.labelWebSite.Location = new Point(dx - txtDx, dy - buttonDy - txtDy - 2);
+
+            txtDx = this.label5min.Width;
+            this.label5min.Location = new Point(dx - txtDx, 4);
+
+            txtDx = this.label15min.Width;
+            this.label15min.Location = new Point(dx - txtDx, 4 + txtDy + 2);
+
+            txtDx = this.label30min.Width;
+            this.label30min.Location = new Point(dx - txtDx, 4 + txtDy + 2 + txtDy + 2);
+
+            this.ResumeLayout();
         }
 
         public bool IsWin7OrGreater()
