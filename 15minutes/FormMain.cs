@@ -88,6 +88,7 @@ namespace _15minutes
                 }
                 this.Activate();
                 this.Focus();
+                this.BringToFront();
             }
         }
 
