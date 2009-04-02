@@ -137,7 +137,7 @@
             this.MaximumSize = new System.Drawing.Size(298, 152);
             this.MinimumSize = new System.Drawing.Size(298, 152);
             this.Name = "FormMain";
-            this.Text = "15minutes";
+            this.Text = "15minutes v1.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
