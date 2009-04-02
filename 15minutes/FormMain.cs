@@ -49,6 +49,8 @@ namespace _15minutes
             this.label15min.MouseLeave += new EventHandler(label_MouseLeave);
             this.label30min.MouseEnter += new EventHandler(label_MouseEnter);
             this.label30min.MouseLeave += new EventHandler(label_MouseLeave);
+            this.labelWebSite.MouseEnter += new EventHandler(label_MouseEnter);
+            this.labelWebSite.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
 
             notifyIcon = new NotifyIcon(this.components);
@@ -94,6 +96,15 @@ namespace _15minutes
             SetResidentMode(false);
         }
 
+        protected void SetLabelsVisible(bool visible)
+        {
+            label5min.Visible = visible;
+            label15min.Visible = visible;
+            label30min.Visible = visible;
+            labelWebSite.Visible = visible;
+
+        }
+
         public void SwitchToSettingTimeState()
         {
             CurrentState = State.SettingTime;
@@ -101,10 +112,7 @@ namespace _15minutes
             TotalTime = DefaultTotalTime;
             timer.Stop();
 
-            label5min.Visible = true;
-            label15min.Visible = true;
-            label30min.Visible = true;
-
+            SetLabelsVisible(true);
             buttonStartOk.Text = "Start countdown";
             buttonStartOk.Visible = true;
 
@@ -119,13 +127,13 @@ namespace _15minutes
         {
             CurrentState = State.Running;
 
-            label5min.Visible = false;
-            label15min.Visible = false;
-            label30min.Visible = false;
+            SetLabelsVisible(false);
 
             buttonStartOk.Visible = false;
 
             buttonPauseResume.Visible = true;
+            buttonPauseResume.Text = "Pause";
+
             buttonStop.Visible = true;
 
             if (resetTime)
@@ -140,9 +148,7 @@ namespace _15minutes
         {
             CurrentState = State.Paused;
 
-            label5min.Visible = false;
-            label15min.Visible = false;
-            label30min.Visible = false;
+            SetLabelsVisible(false);
 
             buttonStartOk.Visible = false;
 
@@ -158,9 +164,7 @@ namespace _15minutes
         {
             CurrentState = State.Finished;
 
-            label5min.Visible = false;
-            label15min.Visible = false;
-            label30min.Visible = false;
+            SetLabelsVisible(false);
 
             buttonStartOk.Visible = true;
             buttonStartOk.Text = "Ok";
@@ -179,7 +183,7 @@ namespace _15minutes
         private void label_MouseEnter(object sender, EventArgs e)
         {
             Control c = sender as Control;
-            c.BackColor = System.Drawing.Color.White;
+            c.BackColor = System.Drawing.Color.Yellow;
         }
 
         private void label_MouseLeave(object sender, EventArgs e)
@@ -291,6 +295,11 @@ namespace _15minutes
         private void buttonStop_Click(object sender, EventArgs e)
         {
             SwitchToSettingTimeState();
+        }
+
+        private void labelWebSite_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://blog.kowalczyk.info/software/15minutes");
         }
     }
 }
