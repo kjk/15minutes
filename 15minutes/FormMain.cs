@@ -17,10 +17,6 @@ namespace _15minutes
 
     public partial class FormMain : Form
     {
-        int Hours;
-        int Minutes;
-        int Seconds;
-
         TimeSpan DefaultTotalTime = new TimeSpan(0, 15, 0);
         TimeSpan TotalTime;
         TimeSpan RemainingTime;
@@ -30,9 +26,6 @@ namespace _15minutes
 
         public void SetTime(int hours, int minutes, int seconds)
         {
-            Hours = hours;
-            Minutes = minutes;
-            Seconds = seconds;
             TotalTime = new TimeSpan(hours, minutes, seconds);
             DefaultTotalTime = new TimeSpan(hours, minutes, seconds);
             this.Invalidate();
