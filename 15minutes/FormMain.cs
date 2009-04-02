@@ -21,10 +21,12 @@ namespace _15minutes
         int Minutes;
         int Seconds;
 
+        TimeSpan DefaultTotalTime = new TimeSpan(0, 15, 0);
         TimeSpan TotalTime;
         TimeSpan RemainingTime;
         State CurrentState;
         DateTime StartTime;
+        private NotifyIcon notifyIcon;
 
         public void SetTime(int hours, int minutes, int seconds)
         {
@@ -32,12 +34,15 @@ namespace _15minutes
             Minutes = minutes;
             Seconds = seconds;
             TotalTime = new TimeSpan(hours, minutes, seconds);
+            DefaultTotalTime = new TimeSpan(hours, minutes, seconds);
             this.Invalidate();
         }
 
         public FormMain()
         {
             InitializeComponent();
+            this.Resize += new EventHandler(FormMain_Resize);
+
             this.label5min.MouseEnter += new EventHandler(label_MouseEnter);
             this.label5min.MouseLeave += new EventHandler(label_MouseLeave);
             this.label15min.MouseEnter += new EventHandler(label_MouseEnter);
@@ -45,16 +50,55 @@ namespace _15minutes
             this.label30min.MouseEnter += new EventHandler(label_MouseEnter);
             this.label30min.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
+
+            notifyIcon = new NotifyIcon(this.components);
+            notifyIcon.Icon = this.Icon;
+            notifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);
+
             SwitchToSettingTimeState();
+        }
+
+        public void FormMain_Resize(object sender, System.EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                SetResidentMode(true);
+            }
+        }
+
+        public void SetResidentMode(bool resident)
+        {
+            if (resident)
+            {
+                Hide();
+                notifyIcon.Visible = true;
+                ShowInTaskbar = false;
+            }
+            else
+            {
+                notifyIcon.Visible = false;
+                ShowInTaskbar = true;
+                this.Show();
+                this.Size = new Size(298, 152);
+                if (this.WindowState == FormWindowState.Minimized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                }
+                this.Activate();
+                this.Focus();
+            }
+        }
+
+        protected void NotifyIcon_DoubleClick(Object sender, System.EventArgs e)
+        {
+            SetResidentMode(false);
         }
 
         public void SwitchToSettingTimeState()
         {
             CurrentState = State.SettingTime;
 
-            // TODO: remember what it was last
-            SetTime(0, 15, 0);
-            //SetTime(0, 0, 5);
+            TotalTime = DefaultTotalTime;
             timer.Stop();
 
             label5min.Visible = true;
@@ -128,6 +172,7 @@ namespace _15minutes
             timer.Interval = 200;
             timer.Start();
 
+            SetResidentMode(false);
             this.Invalidate();
         }
 
