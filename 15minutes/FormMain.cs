@@ -55,9 +55,20 @@ namespace _15minutes
 
             notifyIcon = new NotifyIcon(this.components);
             notifyIcon.Icon = this.Icon;
-            notifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);
+            notifyIcon.DoubleClick += new EventHandler(NotifyIcon_ClickOrDoubleClick);
+            notifyIcon.Click += new EventHandler(NotifyIcon_ClickOrDoubleClick);
 
             SwitchToSettingTimeState();
+        }
+
+        public bool IsWin7OrGreater()
+        {
+            System.OperatingSystem osInfo = System.Environment.OSVersion;
+            if (osInfo.Platform != System.PlatformID.Win32NT)
+                return false;
+            if (osInfo.Version.Major >= 6 && osInfo.Version.Minor >= 1)
+                return true;
+            return false;
         }
 
         public void FormMain_Resize(object sender, System.EventArgs e)
@@ -72,14 +83,21 @@ namespace _15minutes
         {
             if (resident)
             {
-                Hide();
-                notifyIcon.Visible = true;
-                ShowInTaskbar = false;
+                if (!IsWin7OrGreater())
+                {
+                    Hide();
+                    notifyIcon.Visible = true;
+                    ShowInTaskbar = false;
+                }
             }
             else
             {
-                notifyIcon.Visible = false;
-                ShowInTaskbar = true;
+                if (!IsWin7OrGreater())
+                {
+                    notifyIcon.Visible = false;
+                    ShowInTaskbar = true;
+                }
+
                 this.Show();
                 this.Size = new Size(298, 152);
                 if (this.WindowState == FormWindowState.Minimized)
@@ -92,7 +110,7 @@ namespace _15minutes
             }
         }
 
-        protected void NotifyIcon_DoubleClick(Object sender, System.EventArgs e)
+        protected void NotifyIcon_ClickOrDoubleClick(Object sender, System.EventArgs e)
         {
             SetResidentMode(false);
         }
@@ -103,7 +121,6 @@ namespace _15minutes
             label15min.Visible = visible;
             label30min.Visible = visible;
             labelWebSite.Visible = visible;
-
         }
 
         public void SwitchToSettingTimeState()
