@@ -282,6 +282,7 @@ namespace _15minutes
                 int dx = rect.Width;
                 int dy = rect.Height - buttonStartOk.Height;
                 string s = String.Format("{0:D2} : {1:D2} : {2:D2}", hours, minutes, seconds);
+                notifyIcon.Text = s;
                 SizeF strSize = g.MeasureString(s, font);
 
                 float x = (dx - strSize.Width) / 2;
