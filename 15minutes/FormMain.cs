@@ -283,6 +283,15 @@ namespace _15minutes
             return passed > TotalTime;
         }
 
+        private string GetTimeString()
+        {
+            TimeSpan timeToShow = RemainingTime;
+            if (CurrentState == State.SettingTime)
+                timeToShow = TotalTime;
+            string s = String.Format("{0:D2} : {1:D2} : {2:D2}", timeToShow.Hours, timeToShow.Minutes, timeToShow.Seconds);
+            return s;
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (CurrentState == State.Running)
@@ -290,6 +299,8 @@ namespace _15minutes
                 bool shouldStop = CalcRemaining();
                 if (shouldStop)
                     SwitchToFinishedState();
+                else if (notifyIcon.Visible)
+                    notifyIcon.Text = GetTimeString();
             }
             else
             {
@@ -308,13 +319,6 @@ namespace _15minutes
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            TimeSpan timeToShow = RemainingTime;
-            if (CurrentState == State.SettingTime)
-                timeToShow = TotalTime;
-            int hours = timeToShow.Hours;
-            int minutes = timeToShow.Minutes;
-            int seconds = timeToShow.Seconds;
-
             using (var font = new Font("Arial", 24, FontStyle.Bold))
             {
                 Graphics g = e.Graphics;
@@ -322,8 +326,7 @@ namespace _15minutes
                 Rectangle rect = this.ClientRectangle;
                 int dx = rect.Width;
                 int dy = rect.Height - buttonStartOk.Height;
-                string s = String.Format("{0:D2} : {1:D2} : {2:D2}", hours, minutes, seconds);
-                notifyIcon.Text = s;
+                string s = this.GetTimeString();
                 SizeF strSize = g.MeasureString(s, font);
 
                 float x = (dx - strSize.Width) / 2;
