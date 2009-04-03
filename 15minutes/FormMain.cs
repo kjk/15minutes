@@ -175,7 +175,7 @@ namespace _15minutes
             this.Invalidate();
         }
 
-        public void SwitchToRunningState(bool resetTime)
+        public void SwitchToRunningState()
         {
             CurrentState = State.Running;
 
@@ -188,8 +188,7 @@ namespace _15minutes
 
             buttonStop.Visible = true;
 
-            if (resetTime)
-                StartTime = DateTime.Now;
+            StartTime = DateTime.Now;
             CalcRemaining();
             timer.Interval = 1000;
             timer.Start();
@@ -198,6 +197,9 @@ namespace _15minutes
 
         public void SwitchToPausedState()
         {
+            CalcRemaining();
+            TotalTime = RemainingTime;
+
             CurrentState = State.Paused;
 
             SetLabelsVisible(false);
@@ -263,7 +265,7 @@ namespace _15minutes
         {
             if (CurrentState == State.SettingTime)
             {
-                SwitchToRunningState(true);
+                SwitchToRunningState();
             }
             else
             {
@@ -340,11 +342,13 @@ namespace _15minutes
         private void buttonPauseResume_Click(object sender, EventArgs e)
         {
             if (CurrentState == State.Running)
+            {
                 SwitchToPausedState();
-            else 
+            }
+            else
             {
                 Debug.Assert(CurrentState == State.Paused);
-                SwitchToRunningState(false);
+                SwitchToRunningState();
             }
         }
 
