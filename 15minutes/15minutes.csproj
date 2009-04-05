@@ -74,10 +74,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\%24this.Icon.ico" />
+    <Content Include="MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MainIcon.ico" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
