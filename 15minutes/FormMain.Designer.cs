@@ -38,14 +38,15 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonPauseResume = new System.Windows.Forms.Button();
             this.labelWebSite = new System.Windows.Forms.Label();
+            this.label1hr = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonStartOk
             // 
             this.buttonStartOk.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartOk.Location = new System.Drawing.Point(0, 90);
+            this.buttonStartOk.Location = new System.Drawing.Point(0, 100);
             this.buttonStartOk.Name = "buttonStartOk";
-            this.buttonStartOk.Size = new System.Drawing.Size(282, 23);
+            this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
             this.buttonStartOk.TabIndex = 0;
             this.buttonStartOk.Text = "Start countdown";
             this.buttonStartOk.UseVisualStyleBackColor = true;
@@ -121,11 +122,23 @@
             this.labelWebSite.Text = "http://blog.kowalczyk.info";
             this.labelWebSite.Click += new System.EventHandler(this.labelWebSite_Click);
             // 
+            // label1hr
+            // 
+            this.label1hr.AutoSize = true;
+            this.label1hr.BackColor = System.Drawing.SystemColors.Control;
+            this.label1hr.Location = new System.Drawing.Point(257, 40);
+            this.label1hr.Name = "label1hr";
+            this.label1hr.Size = new System.Drawing.Size(25, 13);
+            this.label1hr.TabIndex = 7;
+            this.label1hr.Text = "1 hr";
+            this.label1hr.Click += new System.EventHandler(this.label1hr_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 113);
+            this.ClientSize = new System.Drawing.Size(290, 123);
+            this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
             this.Controls.Add(this.buttonPauseResume);
             this.Controls.Add(this.buttonStop);
@@ -153,6 +166,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonPauseResume;
         private System.Windows.Forms.Label labelWebSite;
+        private System.Windows.Forms.Label label1hr;
     }
 }
 

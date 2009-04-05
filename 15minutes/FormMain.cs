@@ -42,6 +42,8 @@ namespace _15minutes
             this.label15min.MouseLeave += new EventHandler(label_MouseLeave);
             this.label30min.MouseEnter += new EventHandler(label_MouseEnter);
             this.label30min.MouseLeave += new EventHandler(label_MouseLeave);
+            this.label1hr.MouseEnter += new EventHandler(label_MouseEnter);
+            this.label1hr.MouseLeave += new EventHandler(label_MouseLeave);
             this.labelWebSite.MouseEnter += new EventHandler(label_MouseEnter);
             this.labelWebSite.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
@@ -83,14 +85,21 @@ namespace _15minutes
 
             this.labelWebSite.Location = new Point(dx - txtDx, dy - buttonDy - txtDy - 2);
 
+            int y = 4;
             txtDx = this.label5min.Width;
-            this.label5min.Location = new Point(dx - txtDx, 4);
+            this.label5min.Location = new Point(dx - txtDx, y);
+            y += txtDy + 2;
 
             txtDx = this.label15min.Width;
-            this.label15min.Location = new Point(dx - txtDx, 4 + txtDy + 2);
+            this.label15min.Location = new Point(dx - txtDx, y);
+            y += txtDy + 2;
 
             txtDx = this.label30min.Width;
-            this.label30min.Location = new Point(dx - txtDx, 4 + txtDy + 2 + txtDy + 2);
+            this.label30min.Location = new Point(dx - txtDx, y);
+            y += txtDy + 2;
+
+            txtDx = this.label1hr.Width;
+            this.label1hr.Location = new Point(dx - txtDx, y);
 
             this.ResumeLayout();
         }
@@ -154,6 +163,7 @@ namespace _15minutes
             label5min.Visible = visible;
             label15min.Visible = visible;
             label30min.Visible = visible;
+            label1hr.Visible = visible;
             labelWebSite.Visible = visible;
         }
 
@@ -259,6 +269,11 @@ namespace _15minutes
         private void label30min_Click(object sender, EventArgs e)
         {
             SetTime(0, 30, 0);
+        }
+
+        private void label1hr_Click(object sender, EventArgs e)
+        {
+            SetTime(1, 00, 0);
         }
 
         private void buttonStartOk_Click(object sender, EventArgs e)
