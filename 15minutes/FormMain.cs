@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -47,6 +49,11 @@ namespace _15minutes
             this.labelWebSite.MouseEnter += new EventHandler(label_MouseEnter);
             this.labelWebSite.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
+
+            var ass = Assembly.GetExecutingAssembly();
+            //string[] names = ass.GetManifestResourceNames();
+            Stream strm = ass.GetManifestResourceStream("_15minutes.HourGlass.ico");
+            this.Icon = new Icon(strm);
 
             notifyIcon = new NotifyIcon(this.components);
             notifyIcon.Icon = this.Icon;
@@ -375,6 +382,10 @@ namespace _15minutes
         private void labelWebSite_Click(object sender, EventArgs e)
         {
             Process.Start("http://blog.kowalczyk.info/software/15minutes");
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
         }
     }
 }

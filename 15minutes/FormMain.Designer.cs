@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonStartOk = new System.Windows.Forms.Button();
             this.label5min = new System.Windows.Forms.Label();
             this.label15min = new System.Windows.Forms.Label();
@@ -44,7 +43,7 @@
             // buttonStartOk
             // 
             this.buttonStartOk.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartOk.Location = new System.Drawing.Point(0, 100);
+            this.buttonStartOk.Location = new System.Drawing.Point(0, 86);
             this.buttonStartOk.Name = "buttonStartOk";
             this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
             this.buttonStartOk.TabIndex = 0;
@@ -91,7 +90,7 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(143, 90);
+            this.buttonStop.Location = new System.Drawing.Point(143, 76);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(139, 23);
             this.buttonStop.TabIndex = 4;
@@ -103,7 +102,7 @@
             // buttonPauseResume
             // 
             this.buttonPauseResume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonPauseResume.Location = new System.Drawing.Point(0, 90);
+            this.buttonPauseResume.Location = new System.Drawing.Point(0, 76);
             this.buttonPauseResume.Name = "buttonPauseResume";
             this.buttonPauseResume.Size = new System.Drawing.Size(144, 23);
             this.buttonPauseResume.TabIndex = 5;
@@ -115,6 +114,7 @@
             // labelWebSite
             // 
             this.labelWebSite.AutoSize = true;
+            this.labelWebSite.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.labelWebSite.Location = new System.Drawing.Point(151, 74);
             this.labelWebSite.Name = "labelWebSite";
             this.labelWebSite.Size = new System.Drawing.Size(131, 13);
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 123);
+            this.ClientSize = new System.Drawing.Size(290, 109);
             this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
             this.Controls.Add(this.buttonPauseResume);
@@ -146,11 +146,11 @@
             this.Controls.Add(this.label15min);
             this.Controls.Add(this.label5min);
             this.Controls.Add(this.buttonStartOk);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(298, 152);
-            this.MinimumSize = new System.Drawing.Size(298, 152);
+            this.MaximumSize = new System.Drawing.Size(298, 138);
+            this.MinimumSize = new System.Drawing.Size(298, 138);
             this.Name = "FormMain";
             this.Text = "15minutes v1.0";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
