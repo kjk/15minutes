@@ -1,0 +1,37 @@
+What is 15minutes?
+==================
+
+15minutes is a productivity tool disguised as a timer.
+
+License
+=======
+
+The code is in Public Domain - take all the code you want, we'll just
+write more.
+
+Technology
+==========
+
+It's written in C#, targeting .NET 2.0. Solution and project file
+was created in Visual Studio 2008 (a free Visual Studio 2008 Express
+should handle it).
+
+The culprits
+============
+
+15minutes was written by Krzysztof Kowalczyk (http://blog.kowalczyk.info).
+
+Todo
+====
+
+As far as I'm concerned, 15minutes is done.
+
+It doesn't mean it couldn't be improved.
+
+A good addition would be ability to set the timer to an arbitrary value,
+other than one of the pre-defined values.
+
+Another good thing would be making time display a little bit more
+attractive.
+
+Creating an installer wouldn't hurt either.
