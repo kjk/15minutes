@@ -199,7 +199,7 @@ namespace _15minutes
             buttonPauseResume.Visible = false;
             buttonStop.Visible = false;
 
-            SetBackColor(this.BackColor);
+            SetBackColor(this.BgColor);
             this.Invalidate();
         }
 
@@ -392,7 +392,9 @@ namespace _15minutes
 
         private void labelWebSite_Click(object sender, EventArgs e)
         {
-            Process.Start("http://blog.kowalczyk.info/software/15minutes");
+            // this is a bit.ly link to:
+            // "http://blog.kowalczyk.info/software/15minutes/index.html?from15minutes"
+            Process.Start("http://bit.ly/eElvh");
         }
 
         private void FormMain_Load(object sender, EventArgs e)
