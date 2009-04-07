@@ -25,6 +25,7 @@ namespace _15minutes
         State CurrentState;
         DateTime StartTime;
         private NotifyIcon notifyIcon;
+        Color BgColor = System.Drawing.Color.White;
 
         public void SetTime(int hours, int minutes, int seconds)
         {
@@ -90,7 +91,7 @@ namespace _15minutes
             Debug.Assert(txtDy == this.label15min.Height);
             Debug.Assert(txtDy == this.label30min.Height);
 
-            this.labelWebSite.Location = new Point(dx - txtDx, dy - buttonDy - txtDy - 2);
+            this.labelWebSite.Location = new Point(2, dy - buttonDy - txtDy - 2);
 
             int y = 4;
             txtDx = this.label5min.Width;
@@ -174,6 +175,16 @@ namespace _15minutes
             labelWebSite.Visible = visible;
         }
 
+        public void SetBackColor(Color color)
+        {
+            this.BackColor = color;
+            label5min.BackColor = color;
+            label15min.BackColor = color;
+            label30min.BackColor = color;
+            label1hr.BackColor = color;
+            labelWebSite.BackColor = color;
+        }
+
         public void SwitchToSettingTimeState()
         {
             CurrentState = State.SettingTime;
@@ -182,13 +193,13 @@ namespace _15minutes
             timer.Stop();
 
             SetLabelsVisible(true);
-            buttonStartOk.Text = "Start countdown";
+            buttonStartOk.Text = "Start";
             buttonStartOk.Visible = true;
 
             buttonPauseResume.Visible = false;
             buttonStop.Visible = false;
 
-            this.BackColor = SystemColors.Control;
+            SetBackColor(this.BackColor);
             this.Invalidate();
         }
 
@@ -260,7 +271,7 @@ namespace _15minutes
         private void label_MouseLeave(object sender, EventArgs e)
         {
             Control c = sender as Control;
-            c.BackColor = System.Drawing.SystemColors.Control;
+            c.BackColor = this.BgColor;
         }
 
         private void label5min_Click(object sender, EventArgs e)

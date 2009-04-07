@@ -47,7 +47,7 @@
             this.buttonStartOk.Name = "buttonStartOk";
             this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
             this.buttonStartOk.TabIndex = 0;
-            this.buttonStartOk.Text = "Start countdown";
+            this.buttonStartOk.Text = "Start";
             this.buttonStartOk.UseVisualStyleBackColor = true;
             this.buttonStartOk.Click += new System.EventHandler(this.buttonStartOk_Click);
             // 
@@ -74,7 +74,7 @@
             // label30min
             // 
             this.label30min.AutoSize = true;
-            this.label30min.BackColor = System.Drawing.SystemColors.Control;
+            this.label30min.BackColor = System.Drawing.Color.White;
             this.label30min.Location = new System.Drawing.Point(246, 27);
             this.label30min.Name = "label30min";
             this.label30min.Size = new System.Drawing.Size(38, 13);
@@ -92,7 +92,7 @@
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStop.Location = new System.Drawing.Point(143, 76);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(139, 23);
+            this.buttonStop.Size = new System.Drawing.Size(144, 23);
             this.buttonStop.TabIndex = 4;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -115,17 +115,17 @@
             // 
             this.labelWebSite.AutoSize = true;
             this.labelWebSite.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.labelWebSite.Location = new System.Drawing.Point(151, 74);
+            this.labelWebSite.Location = new System.Drawing.Point(1, 60);
             this.labelWebSite.Name = "labelWebSite";
-            this.labelWebSite.Size = new System.Drawing.Size(131, 13);
+            this.labelWebSite.Size = new System.Drawing.Size(229, 13);
             this.labelWebSite.TabIndex = 6;
-            this.labelWebSite.Text = "http://blog.kowalczyk.info";
+            this.labelWebSite.Text = "http://blog.kowalczyk.info/software/15minutes";
             this.labelWebSite.Click += new System.EventHandler(this.labelWebSite_Click);
             // 
             // label1hr
             // 
             this.label1hr.AutoSize = true;
-            this.label1hr.BackColor = System.Drawing.SystemColors.Control;
+            this.label1hr.BackColor = System.Drawing.Color.White;
             this.label1hr.Location = new System.Drawing.Point(257, 40);
             this.label1hr.Name = "label1hr";
             this.label1hr.Size = new System.Drawing.Size(25, 13);
@@ -137,6 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(290, 109);
             this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
