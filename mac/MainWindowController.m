@@ -2,14 +2,14 @@
 
 @implementation MyLabel
 
-- (id) initWithCoder: (NSCoder *) coder
+- (id)initWithCoder: (NSCoder *) coder
 {
 	self = [super initWithCoder: coder];
 	if (!self)
 		return nil;
 
 	trackingTag = 0;
-		
+
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];		
 	[nc addObserver: self
 		   selector: @selector(resetBounds:)
@@ -17,6 +17,17 @@
 			 object: nil];
 
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+	[super dealloc];
+}
+
+- (void)setSeconds:(int)aSeconds
+{
+	seconds = aSeconds;
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
@@ -48,16 +59,45 @@
 
 @end
 
+@interface MainWindowController (Private)
+
+- (void)setRemainingTime:(int)seconds;
+- (void)timerFunc;
+
+@end
+
 @implementation MainWindowController
 
 - (void)awakeFromNib
 {
 	[[NSApplication sharedApplication] setDelegate:self];
+	seconds = 15*60;
+	[self setRemainingTime:seconds];
+}
+
+- (void)setRemainingTime:(int)seconds
+{
+	
+}
+
+- (void)timerFunc
+{
+	seconds = seconds - 1;
+	if (seconds <= 0)
+	{
+		[timer invalidate];
+		[timer release];
+		timer = nil;
+	}
 }
 
 - (IBAction)start:(id)sender
 {
-
+	timer = [NSTimer timerWithTimeInterval: 1.0f
+									target: self
+								  selector: @selector (timerFunc:)
+								  userInfo: nil
+								   repeats: YES];	
 }
 
 - (IBAction)pause:(id)sender

@@ -3,6 +3,7 @@
 @interface MyLabel : NSTextField 
 {
 	NSTrackingRectTag	trackingTag;
+	int					seconds;
 }
 
 @end
@@ -20,6 +21,9 @@
 	IBOutlet NSButton *		buttonStart;
 	IBOutlet NSButton *		buttonStop;
 	IBOutlet NSButton *		butttonResume;
+	
+	NSTimer *				timer;
+	int						seconds;
 }
 
 - (IBAction)start:(id)sender;
