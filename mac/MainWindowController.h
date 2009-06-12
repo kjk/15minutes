@@ -2,13 +2,8 @@
 
 @interface MyLabel : NSTextField {
 	
-	
+	NSTrackingRectTag	trackingTag;
 }
-
-/*
-- (void)mouseEntered:(NSEvent *)theEvent;
-- (void)mouseExited:(NSEvent *)theEvent;
-*/
 
 @end
 
