@@ -1,18 +1,19 @@
 #import <Cocoa/Cocoa.h>
 
-@interface MyLabel : NSTextField {
-	
+@interface MyLabel : NSTextField 
+{
 	NSTrackingRectTag	trackingTag;
 }
 
 @end
 
-@interface MainWindowController : NSObject {
-	IBOutlet NSWindow *	window;
-	IBOutlet MyLabel *	text5min;
-	IBOutlet MyLabel *	text15min;
-	IBOutlet MyLabel *	text30min;
-	IBOutlet MyLabel *	text1hr;
+@interface MainWindowController : NSObject
+{
+	IBOutlet NSWindow *		window;
+	IBOutlet MyLabel *		text5min;
+	IBOutlet MyLabel *		text15min;
+	IBOutlet MyLabel *		text30min;
+	IBOutlet MyLabel *		text1hr;
 
 	IBOutlet NSTextField *	textTime;
 

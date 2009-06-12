@@ -13,26 +13,37 @@
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];		
 	[nc addObserver: self
 		   selector: @selector(resetBounds:)
-			   name: NSViewFrameDidChangeNotification object: nil];
+			   name: NSViewFrameDidChangeNotification
+			 object: nil];
 
     return self;
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-	[self setBackgroundColor:[NSColor blueColor]];
+	[self setBackgroundColor: [NSColor whiteColor]];
+    [self setNeedsDisplay: YES];	
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-	[self setBackgroundColor:[NSColor windowBackgroundColor]];
+	[self setBackgroundColor: [NSColor windowBackgroundColor]];
+    [self setNeedsDisplay: YES];	
+}
+
+- (void)mouseDown:(NSEvent *)theEvent 
+{
+	/* TODO: change the time in the display */
 }
 
 - (void) resetBounds: (NSNotification *) notification
 {
     if (trackingTag)
         [self removeTrackingRect: trackingTag];
-    trackingTag = [self addTrackingRect: [self bounds] owner: self userData: nil assumeInside: NO];
+    trackingTag = [self addTrackingRect: [self bounds]
+								  owner: self
+							   userData: nil
+						   assumeInside: NO];
 }
 
 @end

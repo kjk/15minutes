@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>7F1F1A8F0FE1F427007CCCA2</string>
+						<string>7F1F1AA90FE1F5EE007CCCA2</string>
 						<key>history</key>
 						<array>
 							<string>7F1F1A6E0FE1F3C8007CCCA2</string>
@@ -269,8 +269,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -349,6 +347,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -366,7 +366,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7F1F1A8E0FE1F427007CCCA2</string>
+										<string>7F1F1AA80FE1F5EE007CCCA2</string>
 										<key>history</key>
 										<array>
 											<string>7F3762C20FE1DE8E0060E5BC</string>
@@ -576,14 +576,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>7F1F1A900FE1F427007CCCA2</string>
 		<string>7F1F1A880FE1F3D3007CCCA2</string>
 		<string>7F1F1A890FE1F3D3007CCCA2</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>7F3762A20FE1D1E90060E5BC</string>
-		<string>/Users/kkowalczyk/src/15minutes/mac/15minutes.xcodeproj</string>
 		<string>7F1F1A7C0FE1F3D3007CCCA2</string>
+		<string>/Users/kkowalczyk/src/15minutes/mac/15minutes.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>313 159 920 500 0 0 1280 778 </string>
