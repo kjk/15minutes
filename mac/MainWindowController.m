@@ -106,7 +106,7 @@
     [window_ setBackgroundColor:[NSColor whiteColor]];
     [self willChangeValueForKey:@"timeFontSize"];
     [self didChangeValueForKey:@"timeFontSize"];
-    [self setDefaultTime:5];
+    [self setMinutes:15];
     paused_ = NO;
 }
 
@@ -135,7 +135,8 @@
     timer_ = nil;
     [window_ setBackgroundColor:[NSColor redColor]];
     [NSApp arrangeInFront:self];
-    // TODO: unminimize if minimized
+    if ([window_ isMiniaturized])
+        [window_ deminiaturize:self];
 }
 
 - (void)timerFunc {
