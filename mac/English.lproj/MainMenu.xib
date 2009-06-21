@@ -8,8 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="57"/>
-			<integer value="372"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1121,7 +1119,7 @@
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1257,7 +1255,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{340, 116}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -1804,38 +1801,6 @@
 					<int key="connectionID">449</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">text5min</string>
-						<reference key="source" ref="266653433"/>
-						<reference key="destination" ref="523404789"/>
-					</object>
-					<int key="connectionID">469</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">text15min</string>
-						<reference key="source" ref="266653433"/>
-						<reference key="destination" ref="204658382"/>
-					</object>
-					<int key="connectionID">470</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">text30min</string>
-						<reference key="source" ref="266653433"/>
-						<reference key="destination" ref="549874696"/>
-					</object>
-					<int key="connectionID">471</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">textTime</string>
-						<reference key="source" ref="266653433"/>
-						<reference key="destination" ref="262583874"/>
-					</object>
-					<int key="connectionID">474</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">start:</string>
 						<reference key="source" ref="266653433"/>
@@ -1845,27 +1810,59 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">buttonStart</string>
+						<string key="label">buttonStart_</string>
 						<reference key="source" ref="266653433"/>
 						<reference key="destination" ref="615102399"/>
 					</object>
-					<int key="connectionID">476</int>
+					<int key="connectionID">479</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">text1hr</string>
+						<string key="label">textTime_</string>
+						<reference key="source" ref="266653433"/>
+						<reference key="destination" ref="262583874"/>
+					</object>
+					<int key="connectionID">480</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">text1hr_</string>
 						<reference key="source" ref="266653433"/>
 						<reference key="destination" ref="214809998"/>
 					</object>
-					<int key="connectionID">477</int>
+					<int key="connectionID">481</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
+						<string key="label">text30min_</string>
+						<reference key="source" ref="266653433"/>
+						<reference key="destination" ref="549874696"/>
+					</object>
+					<int key="connectionID">482</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">text15min_</string>
+						<reference key="source" ref="266653433"/>
+						<reference key="destination" ref="204658382"/>
+					</object>
+					<int key="connectionID">483</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">text5min_</string>
+						<reference key="source" ref="266653433"/>
+						<reference key="destination" ref="523404789"/>
+					</object>
+					<int key="connectionID">484</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">window_</string>
 						<reference key="source" ref="266653433"/>
 						<reference key="destination" ref="972006081"/>
 					</object>
-					<int key="connectionID">478</int>
+					<int key="connectionID">485</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3077,6 +3074,7 @@
 					<string>459.IBPluginDependency</string>
 					<string>460.IBPluginDependency</string>
 					<string>461.IBPluginDependency</string>
+					<string>462.IBPluginDependency</string>
 					<string>468.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.ImportedFromIB2</string>
@@ -3323,6 +3321,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
@@ -3379,7 +3378,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">478</int>
+			<int key="maxID">485</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3408,15 +3407,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>buttonStart</string>
-							<string>buttonStop</string>
-							<string>butttonResume</string>
-							<string>text15min</string>
-							<string>text1hr</string>
-							<string>text30min</string>
-							<string>text5min</string>
-							<string>textTime</string>
-							<string>window</string>
+							<string>buttonStart_</string>
+							<string>buttonStop_</string>
+							<string>butttonResume_</string>
+							<string>text15min_</string>
+							<string>text1hr_</string>
+							<string>text30min_</string>
+							<string>text5min_</string>
+							<string>textTime_</string>
+							<string>window_</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>

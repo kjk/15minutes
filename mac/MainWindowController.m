@@ -8,7 +8,7 @@
 	if (!self)
 		return nil;
 
-	trackingTag = 0;
+	trackingTag_ = 0;
 
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];		
 	[nc addObserver: self
@@ -25,14 +25,14 @@
 	[super dealloc];
 }
 
-- (void)setSeconds:(int)aSeconds
+- (void)setSeconds:(int)seconds
 {
-	seconds = aSeconds;
+	seconds_ = seconds;
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-	[self setBackgroundColor: [NSColor whiteColor]];
+    [self setBackgroundColor: [NSColor whiteColor]];
     [self setNeedsDisplay: YES];	
 }
 
@@ -49,12 +49,12 @@
 
 - (void) resetBounds: (NSNotification *) notification
 {
-    if (trackingTag)
-        [self removeTrackingRect: trackingTag];
-    trackingTag = [self addTrackingRect: [self bounds]
-								  owner: self
-							   userData: nil
-						   assumeInside: NO];
+    if (trackingTag_)
+        [self removeTrackingRect: trackingTag_];
+    trackingTag_ = [self addTrackingRect:[self bounds]
+                                   owner: self
+                                userData: nil
+                            assumeInside: NO];
 }
 
 @end
@@ -68,36 +68,37 @@
 
 @implementation MainWindowController
 
+- (void)setSeconds:(int)seconds
+{
+    seconds_ = seconds;
+}
+
 - (void)awakeFromNib
 {
 	[[NSApplication sharedApplication] setDelegate:self];
-	seconds = 15*60;
-	[self setRemainingTime:seconds];
-}
-
-- (void)setRemainingTime:(int)seconds
-{
-	
+    [self setSeconds:15*60];
 }
 
 - (void)timerFunc
 {
-	seconds = seconds - 1;
-	if (seconds <= 0)
+	seconds_ = seconds_ - 1;
+	if (seconds_ <= 0)
 	{
-		[timer invalidate];
-		[timer release];
-		timer = nil;
+		[timer_ invalidate];
+		[timer_ release];
+		timer_ = nil;
 	}
 }
 
 - (IBAction)start:(id)sender
 {
-	timer = [NSTimer timerWithTimeInterval: 1.0f
+	timer_ = [NSTimer timerWithTimeInterval: 0.1f
 									target: self
 								  selector: @selector (timerFunc:)
 								  userInfo: nil
-								   repeats: YES];	
+								   repeats: YES];
+    [startTime_ release];
+    startTime_ = [NSDate date];
 }
 
 - (IBAction)pause:(id)sender
