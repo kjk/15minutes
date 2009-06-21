@@ -24,12 +24,12 @@
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent {
-    [self setBackgroundColor: [NSColor whiteColor]];
+    [self setBackgroundColor: [NSColor lightGrayColor]];
     [self setNeedsDisplay: YES];	
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
-	[self setBackgroundColor: [NSColor windowBackgroundColor]];
+	[self setBackgroundColor: [NSColor whiteColor]];
     [self setNeedsDisplay: YES];	
 }
 
@@ -103,10 +103,39 @@
 
 - (void)awakeFromNib {
 	[[NSApplication sharedApplication] setDelegate:self];
+    [window_ setBackgroundColor:[NSColor whiteColor]];
     [self willChangeValueForKey:@"timeFontSize"];
     [self didChangeValueForKey:@"timeFontSize"];
-    [self setMinutes:15];
+    [self setDefaultTime:5];
     paused_ = NO;
+}
+
+- (void)setLabelsHidden:(BOOL)hidden {
+    [text5min_   setHidden:hidden];
+    [text15min_  setHidden:hidden];
+    [text30min_  setHidden:hidden];
+    [text1hr_    setHidden:hidden];    
+}
+
+- (IBAction)ok:(id)sender {
+    [buttonOk_ setHidden:YES];
+    [buttonStart_ setHidden:NO];
+    [self setLabelsHidden:NO];
+    [window_ setBackgroundColor:[NSColor whiteColor]];
+    [self setTime:defaultTime_];
+}
+
+- (void)finished {
+    [buttonOk_ setHidden:NO];
+    [buttonStart_ setHidden:NO];
+    [buttonStop_ setHidden:YES];
+    [buttonPauseResume_ setHidden:YES];
+    // TODO: start a timer that flashes window background
+    [timer_ release];
+    timer_ = nil;
+    [window_ setBackgroundColor:[NSColor redColor]];
+    [NSApp arrangeInFront:self];
+    // TODO: unminimize if minimized
 }
 
 - (void)timerFunc {
@@ -117,15 +146,16 @@
     prevPassed_ = passed;
     int remaining = (int)totalTime_ - (int)passed;
     [self setTime:remaining];
-    if (0 == remaining)
-        [self stop:nil];
+    if (remaining <= 0) {
+        // set to 0 to cover the case where we went below zero while main thread
+        // couldn't receive timer events (e.g. while holding the menu open) 
+        [self setTime:0];
+        [self finished];
+    }
 }
 
 - (IBAction)start:(id)sender {
-    [text5min_          setHidden:YES];
-    [text15min_         setHidden:YES];
-    [text30min_         setHidden:YES];
-    [text1hr_           setHidden:YES];
+    [self setLabelsHidden:YES];
     [buttonStart_       setHidden:YES];
     [buttonStop_        setHidden:NO];
     [buttonPauseResume_ setTitle:@"Pause"];
@@ -165,10 +195,7 @@
 }
 
 - (IBAction)stop:(id)sender {
-    [text5min_          setHidden:NO];
-    [text15min_         setHidden:NO];
-    [text30min_         setHidden:NO];
-    [text1hr_           setHidden:NO];
+    [self setLabelsHidden:NO];
     [buttonStart_       setHidden:NO];
     [buttonStop_        setHidden:YES];
     [buttonPauseResume_ setTitle:@"Pause"];

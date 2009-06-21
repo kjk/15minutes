@@ -17,6 +17,7 @@
 	IBOutlet NSTextField *	textTime_;
 
 	IBOutlet NSButton *		buttonStart_;
+    IBOutlet NSButton *     buttonOk_;
     IBOutlet NSButton *     buttonPauseResume_;
 	IBOutlet NSButton *		buttonStop_;
 
@@ -37,5 +38,6 @@
 - (IBAction)start:(id)sender;
 - (IBAction)stop:(id)sender;
 - (IBAction)pauseResume:(id)sender;
+- (IBAction)ok:(id)sender;
 
 @end
