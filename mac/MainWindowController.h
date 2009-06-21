@@ -1,15 +1,12 @@
 #import <Cocoa/Cocoa.h>
 
-@interface MyLabel : NSTextField 
-{
+@interface MyLabel : NSTextField {
 	NSTrackingRectTag	trackingTag_;
 	int					seconds_;
 }
-
 @end
 
-@interface MainWindowController : NSObject
-{
+@interface MainWindowController : NSObject {
 	IBOutlet NSWindow *		window_;
 
 	IBOutlet MyLabel *		text5min_;
@@ -22,15 +19,16 @@
 	IBOutlet NSButton *		buttonStart_;
     IBOutlet NSButton *     buttonPauseResume_;
 	IBOutlet NSButton *		buttonStop_;
-    
-    NSFont *                timeFont_;
-	
+
 	NSTimer *				timer_;
     NSDate *                startTime_;
-	int						seconds_;
+    NSTimeInterval          prevPassed_;
+	NSTimeInterval			totalTime_;
+    int                     defaultTime_;
+    BOOL                    paused_;
 }
 
-- (NSFont*)timeFont;
+- (NSNumber*)timeFontSize;
 
 - (IBAction)fiveMinutes:(id)sender;
 - (IBAction)fifteenMinutes:(id)sender;
