@@ -25,11 +25,6 @@
 	[super dealloc];
 }
 
-- (void)setSeconds:(int)seconds
-{
-	seconds_ = seconds;
-}
-
 - (void)mouseEntered:(NSEvent *)theEvent
 {
     [self setBackgroundColor: [NSColor whiteColor]];
@@ -44,7 +39,9 @@
 
 - (void)mouseDown:(NSEvent *)theEvent 
 {
-	/* TODO: change the time in the display */
+    SEL action = [self action];
+    id target = [self target];
+    [self sendAction:action to:target];
 }
 
 - (void) resetBounds: (NSNotification *) notification
@@ -68,9 +65,37 @@
 
 @implementation MainWindowController
 
+- (NSFont*)timeFont {
+    return timeFont_;
+}
+
 - (void)setSeconds:(int)seconds
 {
     seconds_ = seconds;
+    int minutes = seconds/60;
+    seconds = seconds % 60;
+    NSString *txt = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+    [textTime_ setTitleWithMnemonic:txt];
+}
+
+- (void)setMinutes:(int)minutes {
+    [self setSeconds:minutes*60];
+}
+
+- (IBAction)fiveMinutes:(id)sender {
+    [self setMinutes:5];
+}
+
+- (IBAction)fifteenMinutes:(id)sender {
+    [self setMinutes:15];
+}
+
+- (IBAction)thirtyMinutes:(id)sender {
+    [self setMinutes:30];
+}
+
+- (IBAction)sixtyMinutes:(id)sender {
+    [self setMinutes:60];
 }
 
 - (void)awakeFromNib
@@ -106,7 +131,7 @@
 	
 }
 
-- (IBAction)resume:(id)sender
+- (IBAction)pauseResume:(id)sender
 {
 	
 }

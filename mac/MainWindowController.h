@@ -20,17 +20,24 @@
 	IBOutlet NSTextField *	textTime_;
 
 	IBOutlet NSButton *		buttonStart_;
+    IBOutlet NSButton *     buttonPauseResume_;
 	IBOutlet NSButton *		buttonStop_;
-	IBOutlet NSButton *		butttonResume_;
+    
+    NSFont *                timeFont_;
 	
 	NSTimer *				timer_;
     NSDate *                startTime_;
 	int						seconds_;
 }
 
+- (NSFont*)timeFont;
+
+- (IBAction)fiveMinutes:(id)sender;
+- (IBAction)fifteenMinutes:(id)sender;
+- (IBAction)thirtyMinutes:(id)sender;
+- (IBAction)sixtyMinutes:(id)sender;
 - (IBAction)start:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)resume:(id)sender;
 - (IBAction)stop:(id)sender;
+- (IBAction)pauseResume:(id)sender;
 
 @end
