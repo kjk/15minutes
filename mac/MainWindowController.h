@@ -25,7 +25,8 @@
     NSDate *                startTime_;
 	NSTimeInterval			remainingTime_;
     int                     defaultTime_;
-    BOOL                    paused_;
+
+    int                     flashesRemaining_;
 }
 
 - (NSNumber*)timeFontSize;

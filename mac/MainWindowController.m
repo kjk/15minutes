@@ -54,6 +54,8 @@
 
 - (void)setRemainingTime:(int)seconds;
 - (void)timerFunc;
+- (void)stopTimer;
+- (void)startFlashingTimer;
 
 @end
 
@@ -106,9 +108,8 @@
     [window_ setBackgroundColor:[NSColor whiteColor]];
     [self willChangeValueForKey:@"timeFontSize"];
     [self didChangeValueForKey:@"timeFontSize"];
-    //[self setDefaultTime:5];
     [self setMinutes:15];
-    paused_ = NO;
+    //[self setDefaultTime:5];
 }
 
 - (void)setLabelsHidden:(BOOL)hidden {
@@ -119,6 +120,7 @@
 }
 
 - (IBAction)ok:(id)sender {
+    [self stopTimer];
     [buttonOk_ setHidden:YES];
     [buttonStart_ setHidden:NO];
     [self setLabelsHidden:NO];
@@ -131,10 +133,8 @@
     [buttonStart_ setHidden:NO];
     [buttonStop_ setHidden:YES];
     [buttonPauseResume_ setHidden:YES];
-    // TODO: start a timer that flashes window background
-    [timer_ release];
-    timer_ = nil;
-    [window_ setBackgroundColor:[NSColor redColor]];
+    [self stopTimer];
+    [self startFlashingTimer];
     [NSApp arrangeInFront:self];
     if ([window_ isMiniaturized])
         [window_ deminiaturize:self];
@@ -160,39 +160,71 @@
     }
 }
 
+- (void)stopTimer {
+    [timer_ release];
+    timer_ = nil;
+    [startTime_ release];
+    startTime_ = nil;
+}
+
+- (void)startTimer {
+    timer_ = [NSTimer timerWithTimeInterval:0.1f
+                                     target:self
+                                   selector:@selector(timerFunc)
+                                   userInfo:nil
+                                    repeats:YES];
+    startTime_ = [[NSDate date] retain];
+    [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
+}
+
+- (void)flashTimerFunc {
+    if (0 == (flashesRemaining_ % 2))
+        [window_ setBackgroundColor:[NSColor redColor]];
+    else
+        [window_ setBackgroundColor:[NSColor whiteColor]];
+    --flashesRemaining_;
+    if (0 == flashesRemaining_)
+        [self ok:self];
+}
+
+- (void)startFlashingTimer {
+    timer_ = [NSTimer timerWithTimeInterval:0.5f
+                                     target:self
+                                   selector:@selector(flashTimerFunc)
+                                   userInfo:nil
+                                    repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
+    flashesRemaining_ = 24;
+}
+
 - (IBAction)start:(id)sender {
     [self setLabelsHidden:YES];
     [buttonStart_       setHidden:YES];
     [buttonStop_        setHidden:NO];
     [buttonPauseResume_ setTitle:@"Pause"];
     [buttonPauseResume_ setHidden:NO];
-
-	timer_ = [NSTimer timerWithTimeInterval:0.1f
-									target:self
-								  selector:@selector(timerFunc)
-								  userInfo:nil
-								   repeats:YES];
-    [startTime_ release];
-    startTime_ = [[NSDate date] retain];
-    [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
+    [self startTimer];
 }
 
 - (void)pause {
-    // TODO: stop the timer
+    [self stopTimer];
     [buttonPauseResume_ setTitle:@"Resume"];
     [buttonPauseResume_ setHidden:NO];
-    paused_ = YES;
 }
 
 - (void)resume {
-    // TODO: resume the timer
     [buttonPauseResume_ setTitle:@"Pause"];
-    //[buttonPauseResume_ setHidden:NO];
-    paused_ = NO;
+    [self startTimer];
+}
+
+- (BOOL)isPaused {
+    if (timer_)
+        return NO;
+    return YES;
 }
 
 - (IBAction)pauseResume:(id)sender {
-    if (paused_) {
+    if ([self isPaused]) {
         [self resume];
     } else {
         [self pause];
@@ -200,14 +232,13 @@
 }
 
 - (IBAction)stop:(id)sender {
+    [window_ setBackgroundColor:[NSColor whiteColor]];
     [self setLabelsHidden:NO];
     [buttonStart_       setHidden:NO];
     [buttonStop_        setHidden:YES];
-    [buttonPauseResume_ setTitle:@"Pause"];
     [buttonPauseResume_ setHidden:YES];
 
-    [timer_ release];
-    timer_ = nil;
+    [self stopTimer];
     [self setDisplayTime:defaultTime_];
 }
 
