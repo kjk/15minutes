@@ -64,7 +64,7 @@
     return size;
 }
 
-- (void)setTime:(int)seconds {
+- (void)setDisplayTime:(int)seconds {
     int minutes = seconds/60;
     seconds = seconds % 60;
     NSString *txt = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
@@ -72,8 +72,8 @@
 }
 
 - (void)setSeconds:(int)seconds {
-    totalTime_ = seconds;
-    [self setTime:seconds];
+    remainingTime_ = (NSTimeInterval)seconds;
+    [self setDisplayTime:seconds];
 }
 
 - (void)setDefaultTime:(int)seconds {
@@ -106,6 +106,7 @@
     [window_ setBackgroundColor:[NSColor whiteColor]];
     [self willChangeValueForKey:@"timeFontSize"];
     [self didChangeValueForKey:@"timeFontSize"];
+    //[self setDefaultTime:5];
     [self setMinutes:15];
     paused_ = NO;
 }
@@ -122,7 +123,7 @@
     [buttonStart_ setHidden:NO];
     [self setLabelsHidden:NO];
     [window_ setBackgroundColor:[NSColor whiteColor]];
-    [self setTime:defaultTime_];
+    [self setDisplayTime:defaultTime_];
 }
 
 - (void)finished {
@@ -142,15 +143,19 @@
 - (void)timerFunc {
     NSDate *now = [NSDate date];
     NSTimeInterval passed = [now timeIntervalSinceDate:startTime_];
-    if (passed == prevPassed_)
+    [startTime_ release];
+    startTime_ = [now retain];
+    int prevRemainingSeconds = (int)remainingTime_;
+    remainingTime_ -= passed;
+    int remainingSeconds = (int)remainingTime_;
+    if (prevRemainingSeconds == remainingSeconds)
         return;
-    prevPassed_ = passed;
-    int remaining = (int)totalTime_ - (int)passed;
-    [self setTime:remaining];
-    if (remaining <= 0) {
-        // set to 0 to cover the case where we went below zero while main thread
-        // couldn't receive timer events (e.g. while holding the menu open) 
-        [self setTime:0];
+    // set to 0 to cover the case where we went below zero while main thread
+    // couldn't receive timer events (e.g. while holding the menu open) 
+    if (remainingSeconds < 0)
+        remainingSeconds = 0;
+    [self setDisplayTime:remainingSeconds];
+    if (remainingSeconds == 0) {
         [self finished];
     }
 }
@@ -162,14 +167,13 @@
     [buttonPauseResume_ setTitle:@"Pause"];
     [buttonPauseResume_ setHidden:NO];
 
-    [startTime_ release];
-    startTime_ = [[NSDate date] retain];
-
 	timer_ = [NSTimer timerWithTimeInterval:0.1f
 									target:self
 								  selector:@selector(timerFunc)
 								  userInfo:nil
 								   repeats:YES];
+    [startTime_ release];
+    startTime_ = [[NSDate date] retain];
     [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
 }
 
@@ -204,7 +208,7 @@
 
     [timer_ release];
     timer_ = nil;
-    [self setTime:defaultTime_];
+    [self setDisplayTime:defaultTime_];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {

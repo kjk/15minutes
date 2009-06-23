@@ -23,8 +23,7 @@
 
 	NSTimer *				timer_;
     NSDate *                startTime_;
-    NSTimeInterval          prevPassed_;
-	NSTimeInterval			totalTime_;
+	NSTimeInterval			remainingTime_;
     int                     defaultTime_;
     BOOL                    paused_;
 }
