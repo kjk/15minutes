@@ -52,7 +52,6 @@
 
 @interface MainWindowController (Private)
 
-- (void)setRemainingTime:(int)seconds;
 - (void)timerFunc;
 - (void)stopTimer;
 - (void)startFlashingTimer;
@@ -80,6 +79,10 @@
 
 - (void)setDefaultTime:(int)seconds {
     defaultTime_ = seconds;
+    [self setSeconds:defaultTime_];
+}
+
+- (void)resetTime {
     [self setSeconds:defaultTime_];
 }
 
@@ -125,7 +128,7 @@
     [buttonStart_ setHidden:NO];
     [self setLabelsHidden:NO];
     [window_ setBackgroundColor:[NSColor whiteColor]];
-    [self setDisplayTime:defaultTime_];
+    [self resetTime];
 }
 
 - (void)finished {
@@ -239,7 +242,7 @@
     [buttonPauseResume_ setHidden:YES];
 
     [self stopTimer];
-    [self setDisplayTime:defaultTime_];
+    [self resetTime];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
