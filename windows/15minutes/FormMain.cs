@@ -29,8 +29,13 @@ namespace _15minutes
 
         public void SetTime(int hours, int minutes, int seconds)
         {
-            TotalTime = new TimeSpan(hours, minutes, seconds);
-            DefaultTotalTime = new TimeSpan(hours, minutes, seconds);
+            SetTime(new TimeSpan(hours, minutes, seconds));
+        }
+
+        public void SetTime(TimeSpan time)
+        {
+            TotalTime = time;
+            DefaultTotalTime = time;
             this.Invalidate();
         }
 
@@ -49,6 +54,8 @@ namespace _15minutes
             this.label1hr.MouseLeave += new EventHandler(label_MouseLeave);
             this.labelWebSite.MouseEnter += new EventHandler(label_MouseEnter);
             this.labelWebSite.MouseLeave += new EventHandler(label_MouseLeave);
+            this.labelOther.MouseEnter += new EventHandler(label_MouseEnter);
+            this.labelOther.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
 
             var ass = Assembly.GetExecutingAssembly();
@@ -108,6 +115,11 @@ namespace _15minutes
 
             txtDx = this.label1hr.Width;
             this.label1hr.Location = new Point(dx - txtDx, y);
+            y += txtDy + 2;
+
+            txtDx = this.labelOther.Width;
+            this.labelOther.Location = new Point(dx - txtDx, y);
+            y += txtDy + 2;
 
             this.ResumeLayout();
         }
@@ -172,6 +184,7 @@ namespace _15minutes
             label15min.Visible = visible;
             label30min.Visible = visible;
             label1hr.Visible = visible;
+            labelOther.Visible = visible;
             labelWebSite.Visible = visible;
         }
 
@@ -182,6 +195,7 @@ namespace _15minutes
             label15min.BackColor = color;
             label30min.BackColor = color;
             label1hr.BackColor = color;
+            labelOther.BackColor = color;
             labelWebSite.BackColor = color;
         }
 
@@ -292,6 +306,19 @@ namespace _15minutes
         private void label1hr_Click(object sender, EventArgs e)
         {
             SetTime(1, 00, 0);
+        }
+
+        private void labelOther_Click(object sender, EventArgs e)
+        {
+            using (DurationDialog d = new DurationDialog())
+            {
+                d.Value = (int)DefaultTotalTime.TotalMinutes;
+
+                if (d.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                SetTime(TimeSpan.FromMinutes(d.Value));
+            }
         }
 
         private void buttonStartOk_Click(object sender, EventArgs e)

@@ -38,14 +38,15 @@
             this.buttonPauseResume = new System.Windows.Forms.Button();
             this.labelWebSite = new System.Windows.Forms.Label();
             this.label1hr = new System.Windows.Forms.Label();
+            this.labelOther = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonStartOk
             // 
             this.buttonStartOk.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartOk.Location = new System.Drawing.Point(0, 86);
+            this.buttonStartOk.Location = new System.Drawing.Point(0, 79);
             this.buttonStartOk.Name = "buttonStartOk";
-            this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
+            this.buttonStartOk.Size = new System.Drawing.Size(282, 23);
             this.buttonStartOk.TabIndex = 0;
             this.buttonStartOk.Text = "Start";
             this.buttonStartOk.UseVisualStyleBackColor = true;
@@ -133,12 +134,24 @@
             this.label1hr.Text = "1 hr";
             this.label1hr.Click += new System.EventHandler(this.label1hr_Click);
             // 
+            // labelOther
+            // 
+            this.labelOther.AutoSize = true;
+            this.labelOther.BackColor = System.Drawing.Color.White;
+            this.labelOther.Location = new System.Drawing.Point(242, 53);
+            this.labelOther.Name = "labelOther";
+            this.labelOther.Size = new System.Drawing.Size(40, 13);
+            this.labelOther.TabIndex = 8;
+            this.labelOther.Text = "other...";
+            this.labelOther.Click += new System.EventHandler(this.labelOther_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(290, 109);
+            this.ClientSize = new System.Drawing.Size(282, 102);
+            this.Controls.Add(this.labelOther);
             this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
             this.Controls.Add(this.buttonPauseResume);
@@ -168,6 +181,7 @@
         private System.Windows.Forms.Button buttonPauseResume;
         private System.Windows.Forms.Label labelWebSite;
         private System.Windows.Forms.Label label1hr;
+        private System.Windows.Forms.Label labelOther;
     }
 }
 
