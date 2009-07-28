@@ -142,7 +142,7 @@
             this.labelOther.Name = "labelOther";
             this.labelOther.Size = new System.Drawing.Size(40, 13);
             this.labelOther.TabIndex = 8;
-            this.labelOther.Text = "other...";
+            this.labelOther.Text = "custom";
             this.labelOther.Click += new System.EventHandler(this.labelOther_Click);
             // 
             // FormMain
