@@ -164,7 +164,7 @@
 }
 
 - (void)stopTimer {
-    [timer_ release];
+	[timer_ invalidate];
     timer_ = nil;
     [startTime_ release];
     startTime_ = nil;
