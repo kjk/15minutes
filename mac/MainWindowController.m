@@ -1,4 +1,5 @@
 #import "MainWindowController.h"
+#import "TimeDisplayView.h"
 
 @implementation MyLabel
 
@@ -66,10 +67,7 @@
 }
 
 - (void)setDisplayTime:(int)seconds {
-    int minutes = seconds/60;
-    seconds = seconds % 60;
-    NSString *txt = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-    [textTime_ setTitleWithMnemonic:txt];
+    [timeDisplay_ setSeconds:seconds];
 }
 
 - (void)setSeconds:(int)seconds {

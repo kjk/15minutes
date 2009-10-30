@@ -1,5 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
+@class TimeDisplayView;
+
 @interface MyLabel : NSTextField {
 	NSTrackingRectTag	trackingTag_;
 	int					seconds_;
@@ -14,12 +16,11 @@
 	IBOutlet MyLabel *		text30min_;
 	IBOutlet MyLabel *		text1hr_;
 
-	IBOutlet NSTextField *	textTime_;
-
 	IBOutlet NSButton *		buttonStart_;
     IBOutlet NSButton *     buttonOk_;
     IBOutlet NSButton *     buttonPauseResume_;
 	IBOutlet NSButton *		buttonStop_;
+    IBOutlet TimeDisplayView * timeDisplay_;
 
 	NSTimer *				timer_;
     NSDate *                startTime_;
