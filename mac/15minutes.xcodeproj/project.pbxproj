@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		7F3762B30FE1D5BB0060E5BC /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3762B20FE1D5BB0060E5BC /* MainWindowController.m */; };
+		7F3ED61010A6982B0085555B /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F3ED60F10A6982B0085555B /* timer.png */; };
 		7F4D9827109A80C9009E40AA /* 15minutes.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7F4D9826109A80C9009E40AA /* 15minutes.icns */; };
 		7F4D9852109A8336009E40AA /* TimeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D9851109A8336009E40AA /* TimeDisplayView.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -27,6 +28,7 @@
 		32CA4F630368D1EE00C91783 /* 15minutes_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 15minutes_Prefix.pch; sourceTree = "<group>"; };
 		7F3762B10FE1D5BB0060E5BC /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		7F3762B20FE1D5BB0060E5BC /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		7F3ED60F10A6982B0085555B /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		7F4D9826109A80C9009E40AA /* 15minutes.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = 15minutes.icns; sourceTree = "<group>"; };
 		7F4D9850109A8336009E40AA /* TimeDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeDisplayView.h; sourceTree = "<group>"; };
 		7F4D9851109A8336009E40AA /* TimeDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeDisplayView.m; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F3ED60F10A6982B0085555B /* timer.png */,
 				7F4D9826109A80C9009E40AA /* 15minutes.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -170,6 +173,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				7F4D9827109A80C9009E40AA /* 15minutes.icns in Resources */,
+				7F3ED61010A6982B0085555B /* timer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

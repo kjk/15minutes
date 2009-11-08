@@ -1,55 +1,14 @@
 #import "MainWindowController.h"
 #import "TimeDisplayView.h"
 
-@implementation MyLabel
+enum {
+    kMenuItemStart5min = 1,
+    kMenuItemStart15min = 2,
+    kMenuItemStart30min = 3,
 
-- (id)initWithCoder: (NSCoder *) coder {
-	self = [super initWithCoder: coder];
-	if (!self)
-		return nil;
-
-	trackingTag_ = 0;
-
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];		
-	[nc addObserver: self
-		   selector: @selector(resetBounds:)
-			   name: NSViewFrameDidChangeNotification
-			 object: nil];
-
-    return self;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-	[super dealloc];
-}
-
-- (void)mouseEntered:(NSEvent *)theEvent {
-    [self setBackgroundColor: [NSColor lightGrayColor]];
-    [self setNeedsDisplay: YES];	
-}
-
-- (void)mouseExited:(NSEvent *)theEvent {
-	[self setBackgroundColor: [NSColor whiteColor]];
-    [self setNeedsDisplay: YES];	
-}
-
-- (void)mouseDown:(NSEvent *)theEvent {
-    SEL action = [self action];
-    id target = [self target];
-    [self sendAction:action to:target];
-}
-
-- (void) resetBounds: (NSNotification *) notification {
-    if (trackingTag_)
-        [self removeTrackingRect: trackingTag_];
-    trackingTag_ = [self addTrackingRect:[self bounds]
-                                   owner: self
-                                userData: nil
-                            assumeInside: NO];
-}
-
-@end
+    kMenuItemPauseResumeTag = 4,
+    kMenuItemStopTag = 5,
+};
 
 @interface MainWindowController (Private)
 
@@ -61,13 +20,11 @@
 
 @implementation MainWindowController
 
-- (NSNumber*)timeFontSize {
-    NSNumber *size = [NSNumber numberWithInt:24];
-    return size;
-}
-
 - (void)setDisplayTime:(int)seconds {
     [timeDisplay_ setSeconds:seconds];
+
+    NSString *timeStr = [NSString stringWithFormat:@"%2d:%02d", seconds / 60, seconds % 60];
+    [statusItem_ setTitle:timeStr];
 }
 
 - (void)setSeconds:(int)seconds {
@@ -88,57 +45,63 @@
     [self setDefaultTime:minutes*60];
 }
 
-- (IBAction)fiveMinutes:(id)sender {
-    [self setMinutes:5];
+- (void)setRunningMenuState {
+    [[statusItemMenu_ itemWithTag:kMenuItemPauseResumeTag] setEnabled:YES];
+    [[statusItemMenu_ itemWithTag:kMenuItemStopTag] setEnabled:YES];
+    
+    [[statusItemMenu_ itemWithTag:kMenuItemStart5min] setEnabled:NO];
+    [[statusItemMenu_ itemWithTag:kMenuItemStart15min] setEnabled:NO];
+    [[statusItemMenu_ itemWithTag:kMenuItemStart30min] setEnabled:NO];    
 }
 
-- (IBAction)fifteenMinutes:(id)sender {
-    [self setMinutes:15];
-}
-
-- (IBAction)thirtyMinutes:(id)sender {
-    [self setMinutes:30];
-}
-
-- (IBAction)sixtyMinutes:(id)sender {
-    [self setMinutes:60];
+- (void)setStoppedMenuState {
+    [[statusItemMenu_ itemWithTag:kMenuItemPauseResumeTag] setEnabled:NO];
+    [[statusItemMenu_ itemWithTag:kMenuItemStopTag] setEnabled:NO];
+    
+    [[statusItemMenu_ itemWithTag:kMenuItemStart5min] setEnabled:YES];
+    [[statusItemMenu_ itemWithTag:kMenuItemStart15min] setEnabled:YES];
+    [[statusItemMenu_ itemWithTag:kMenuItemStart30min] setEnabled:YES];
 }
 
 - (void)awakeFromNib {
+
+    NSBundle *bundle = [NSBundle mainBundle];
+    statusItemImage_  = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"timer" ofType:@"png"]];
+
+    strFlashAttr_ = [[NSDictionary alloc] initWithObjectsAndKeys:
+                    [NSFont menuBarFontOfSize:0], NSFontAttributeName,
+                    [NSColor redColor], NSBackgroundColorAttributeName,
+                    [NSColor blackColor], NSForegroundColorAttributeName, nil];
+
+    [statusItemMenu_ setAutoenablesItems:NO];
+
+    statusItem_ = [[[NSStatusBar systemStatusBar] 
+				   statusItemWithLength:NSVariableStatusItemLength]
+				  retain];
+    [statusItem_ setImage:statusItemImage_];
+	[statusItem_ setHighlightMode:YES];
+	[statusItem_ setMenu:statusItemMenu_];
+
 	[[NSApplication sharedApplication] setDelegate:self];
-    [window_ setBackgroundColor:[NSColor whiteColor]];
-    [self willChangeValueForKey:@"timeFontSize"];
-    [self didChangeValueForKey:@"timeFontSize"];
     [self setMinutes:15];
-    //[self setDefaultTime:5];
+    [self setStoppedMenuState];
 }
 
-- (void)setLabelsHidden:(BOOL)hidden {
-    [text5min_   setHidden:hidden];
-    [text15min_  setHidden:hidden];
-    [text30min_  setHidden:hidden];
-    [text1hr_    setHidden:hidden];    
+- (void)dealloc {
+    [strFlashAttr_ release];
+    [super dealloc];
 }
 
 - (IBAction)ok:(id)sender {
     [self stopTimer];
-    [buttonOk_ setHidden:YES];
-    [buttonStart_ setHidden:NO];
-    [self setLabelsHidden:NO];
-    [window_ setBackgroundColor:[NSColor whiteColor]];
     [self resetTime];
 }
 
 - (void)finished {
-    [buttonOk_ setHidden:NO];
-    [buttonStart_ setHidden:NO];
-    [buttonStop_ setHidden:YES];
-    [buttonPauseResume_ setHidden:YES];
     [self stopTimer];
+    [self setStoppedMenuState];
     [self startFlashingTimer];
     [NSApp arrangeInFront:self];
-    if ([window_ isMiniaturized])
-        [window_ deminiaturize:self];
 }
 
 - (void)timerFunc {
@@ -179,10 +142,16 @@
 }
 
 - (void)flashTimerFunc {
-    if (0 == (flashesRemaining_ % 2))
-        [window_ setBackgroundColor:[NSColor redColor]];
-    else
-        [window_ setBackgroundColor:[NSColor whiteColor]];
+    NSString *timeStr = @"0:00";
+    if (0 == (flashesRemaining_ % 2)) {
+        NSAttributedString *title = [[NSAttributedString alloc] 
+                                     initWithString:timeStr
+                                     attributes: strFlashAttr_];
+        [statusItem_ setTitle:(NSString*)title];        
+    }
+    else {
+        [statusItem_ setTitle:timeStr];
+    }
     --flashesRemaining_;
     if (0 == flashesRemaining_)
         [self ok:self];
@@ -199,22 +168,34 @@
 }
 
 - (IBAction)start:(id)sender {
-    [self setLabelsHidden:YES];
-    [buttonStart_       setHidden:YES];
-    [buttonStop_        setHidden:NO];
-    [buttonPauseResume_ setTitle:@"Pause"];
-    [buttonPauseResume_ setHidden:NO];
+    [[statusItemMenu_ itemWithTag:kMenuItemPauseResumeTag] setTitle:@"Pause"];
+
+    [self setRunningMenuState];
     [self startTimer];
+}
+
+- (IBAction)start5min:(id)sender {
+    [self setMinutes:5];
+    [self start:sender];
+}
+
+- (IBAction)start15min:(id)sender {
+    [self setMinutes:15];
+    [self start:sender];
+}
+
+- (IBAction)start30min:(id)sender {
+    [self setMinutes:30];
+    [self start:sender];
 }
 
 - (void)pause {
     [self stopTimer];
-    [buttonPauseResume_ setTitle:@"Resume"];
-    [buttonPauseResume_ setHidden:NO];
+    [[statusItemMenu_ itemWithTag:kMenuItemPauseResumeTag] setTitle:@"Resume"];
 }
 
 - (void)resume {
-    [buttonPauseResume_ setTitle:@"Pause"];
+    [[statusItemMenu_ itemWithTag:kMenuItemPauseResumeTag] setTitle:@"Pause"];
     [self startTimer];
 }
 
@@ -233,14 +214,9 @@
 }
 
 - (IBAction)stop:(id)sender {
-    [window_ setBackgroundColor:[NSColor whiteColor]];
-    [self setLabelsHidden:NO];
-    [buttonStart_       setHidden:NO];
-    [buttonStop_        setHidden:YES];
-    [buttonPauseResume_ setHidden:YES];
-
     [self stopTimer];
     [self resetTime];
+    [self setStoppedMenuState];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
