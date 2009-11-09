@@ -249,6 +249,7 @@ namespace _15minutes
             TotalTime = RemainingTime;
 
             CurrentState = State.Paused;
+            this.BackColor = Color.White;
 
             SetLabelsVisible(false);
 
