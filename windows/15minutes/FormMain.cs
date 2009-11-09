@@ -228,7 +228,7 @@ namespace _15minutes
             CurrentState = State.Running;
 
             SetLabelsVisible(false);
-
+            SetBackColor(Color.FromArgb(0xfc, 0xff, 0xa2));
             buttonStartOk.Visible = false;
 
             buttonPauseResume.Visible = true;
@@ -297,8 +297,7 @@ namespace _15minutes
 
         private void label5min_Click(object sender, EventArgs e)
         {
-            //SetTime(0, 5, 0);
-            SetTime(0, 0, 3);
+            SetTime(0, 5, 0);
         }
 
         private void label15min_Click(object sender, EventArgs e)
