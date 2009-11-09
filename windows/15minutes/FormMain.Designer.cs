@@ -44,9 +44,9 @@
             // buttonStartOk
             // 
             this.buttonStartOk.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartOk.Location = new System.Drawing.Point(0, 79);
+            this.buttonStartOk.Location = new System.Drawing.Point(0, 86);
             this.buttonStartOk.Name = "buttonStartOk";
-            this.buttonStartOk.Size = new System.Drawing.Size(282, 23);
+            this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
             this.buttonStartOk.TabIndex = 0;
             this.buttonStartOk.Text = "Start";
             this.buttonStartOk.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.labelOther.BackColor = System.Drawing.Color.White;
             this.labelOther.Location = new System.Drawing.Point(242, 53);
             this.labelOther.Name = "labelOther";
-            this.labelOther.Size = new System.Drawing.Size(40, 13);
+            this.labelOther.Size = new System.Drawing.Size(41, 13);
             this.labelOther.TabIndex = 8;
             this.labelOther.Text = "custom";
             this.labelOther.Click += new System.EventHandler(this.labelOther_Click);
@@ -150,7 +150,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(282, 102);
+            this.ClientSize = new System.Drawing.Size(290, 109);
             this.Controls.Add(this.labelOther);
             this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
@@ -163,7 +163,7 @@
             this.MaximumSize = new System.Drawing.Size(298, 138);
             this.MinimumSize = new System.Drawing.Size(298, 138);
             this.Name = "FormMain";
-            this.Text = "15minutes v1.0";
+            this.Text = "15minutes v1.1";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

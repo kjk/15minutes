@@ -24,6 +24,7 @@ namespace _15minutes
         TimeSpan RemainingTime;
         State CurrentState;
         DateTime StartTime;
+        int FlashCountRemaining;
         private NotifyIcon notifyIcon;
         Color BgColor = System.Drawing.Color.White;
 
@@ -138,11 +139,11 @@ namespace _15minutes
         {
             if (FormWindowState.Minimized == WindowState)
             {
-                SetResidentMode(true);
+                SetResidentMode(true, true);
             }
         }
 
-        public void SetResidentMode(bool resident)
+        public void SetResidentMode(bool resident, bool activate)
         {
             if (resident)
             {
@@ -167,15 +168,20 @@ namespace _15minutes
                 {
                     this.WindowState = FormWindowState.Normal;
                 }
-                this.Activate();
-                this.Focus();
+                if (activate)
+                {
+                    this.Activate();
+                    this.Focus();
+                }
+                this.TopMost = true;
                 this.BringToFront();
+                this.TopMost = false;
             }
         }
 
         protected void NotifyIcon_ClickOrDoubleClick(Object sender, System.EventArgs e)
         {
-            SetResidentMode(false);
+            SetResidentMode(false, true);
         }
 
         protected void SetLabelsVisible(bool visible)
@@ -268,11 +274,12 @@ namespace _15minutes
             buttonPauseResume.Visible = false;
             buttonStop.Visible = false;
 
+            FlashCountRemaining = 20;
             timer.Stop();
             timer.Interval = 200;
             timer.Start();
 
-            SetResidentMode(false);
+            SetResidentMode(false, false);
             this.Invalidate();
         }
 
@@ -290,7 +297,8 @@ namespace _15minutes
 
         private void label5min_Click(object sender, EventArgs e)
         {
-            SetTime(0, 5, 0);
+            //SetTime(0, 5, 0);
+            SetTime(0, 0, 3);
         }
 
         private void label15min_Click(object sender, EventArgs e)
@@ -374,6 +382,9 @@ namespace _15minutes
                 else
                 {
                     this.BackColor = Color.White;
+                    FlashCountRemaining -= 1;
+                    if (FlashCountRemaining <= 0)
+                        SwitchToSettingTimeState();
                 }
             }
             this.Invalidate(true);
