@@ -59,6 +59,8 @@ namespace _15minutes
             this.labelOther.MouseLeave += new EventHandler(label_MouseLeave);
             this.DoubleBuffered = true;
 
+            this.toolTip1 = new ToolTip(this.components);
+            toolTip1.SetToolTip(labelWebSite, "http://blog.kowalczyk.info/software/15minutes/");
             var ass = Assembly.GetExecutingAssembly();
             //string[] names = ass.GetManifestResourceNames();
             Stream strm = ass.GetManifestResourceStream("_15minutes.HourGlass.ico");
@@ -358,7 +360,7 @@ namespace _15minutes
             TimeSpan timeToShow = RemainingTime;
             if (CurrentState == State.SettingTime)
                 timeToShow = TotalTime;
-            string s = String.Format("{0:D2} : {1:D2} : {2:D2}", timeToShow.Hours, timeToShow.Minutes, timeToShow.Seconds);
+            string s = String.Format("{0:D2} : {1:D2}", timeToShow.Minutes + 60 * timeToShow.Hours, timeToShow.Seconds);
             return s;
         }
 
@@ -433,10 +435,6 @@ namespace _15minutes
             // this is a bit.ly link to:
             // "http://blog.kowalczyk.info/software/15minutes/index.html?from15minutes"
             Process.Start("http://bit.ly/eElvh");
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
         }
     }
 }

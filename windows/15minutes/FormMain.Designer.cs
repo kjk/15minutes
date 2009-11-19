@@ -39,14 +39,15 @@
             this.labelWebSite = new System.Windows.Forms.Label();
             this.label1hr = new System.Windows.Forms.Label();
             this.labelOther = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // buttonStartOk
             // 
             this.buttonStartOk.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartOk.Location = new System.Drawing.Point(0, 86);
+            this.buttonStartOk.Location = new System.Drawing.Point(0, 77);
             this.buttonStartOk.Name = "buttonStartOk";
-            this.buttonStartOk.Size = new System.Drawing.Size(290, 23);
+            this.buttonStartOk.Size = new System.Drawing.Size(224, 23);
             this.buttonStartOk.TabIndex = 0;
             this.buttonStartOk.Text = "Start";
             this.buttonStartOk.UseVisualStyleBackColor = true;
@@ -55,7 +56,7 @@
             // label5min
             // 
             this.label5min.AutoSize = true;
-            this.label5min.Location = new System.Drawing.Point(252, 2);
+            this.label5min.Location = new System.Drawing.Point(188, 1);
             this.label5min.Name = "label5min";
             this.label5min.Size = new System.Drawing.Size(32, 13);
             this.label5min.TabIndex = 1;
@@ -65,7 +66,7 @@
             // label15min
             // 
             this.label15min.AutoSize = true;
-            this.label15min.Location = new System.Drawing.Point(246, 14);
+            this.label15min.Location = new System.Drawing.Point(182, 13);
             this.label15min.Name = "label15min";
             this.label15min.Size = new System.Drawing.Size(38, 13);
             this.label15min.TabIndex = 2;
@@ -76,7 +77,7 @@
             // 
             this.label30min.AutoSize = true;
             this.label30min.BackColor = System.Drawing.Color.White;
-            this.label30min.Location = new System.Drawing.Point(246, 27);
+            this.label30min.Location = new System.Drawing.Point(182, 26);
             this.label30min.Name = "label30min";
             this.label30min.Size = new System.Drawing.Size(38, 13);
             this.label30min.TabIndex = 3;
@@ -91,9 +92,9 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(143, 76);
+            this.buttonStop.Location = new System.Drawing.Point(106, 76);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(144, 23);
+            this.buttonStop.Size = new System.Drawing.Size(118, 23);
             this.buttonStop.TabIndex = 4;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -105,7 +106,7 @@
             this.buttonPauseResume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPauseResume.Location = new System.Drawing.Point(0, 76);
             this.buttonPauseResume.Name = "buttonPauseResume";
-            this.buttonPauseResume.Size = new System.Drawing.Size(144, 23);
+            this.buttonPauseResume.Size = new System.Drawing.Size(105, 23);
             this.buttonPauseResume.TabIndex = 5;
             this.buttonPauseResume.Text = "Pause";
             this.buttonPauseResume.UseVisualStyleBackColor = true;
@@ -118,16 +119,16 @@
             this.labelWebSite.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.labelWebSite.Location = new System.Drawing.Point(1, 60);
             this.labelWebSite.Name = "labelWebSite";
-            this.labelWebSite.Size = new System.Drawing.Size(229, 13);
+            this.labelWebSite.Size = new System.Drawing.Size(64, 13);
             this.labelWebSite.TabIndex = 6;
-            this.labelWebSite.Text = "http://blog.kowalczyk.info/software/15minutes";
+            this.labelWebSite.Text = "visit website";
             this.labelWebSite.Click += new System.EventHandler(this.labelWebSite_Click);
             // 
             // label1hr
             // 
             this.label1hr.AutoSize = true;
             this.label1hr.BackColor = System.Drawing.Color.White;
-            this.label1hr.Location = new System.Drawing.Point(257, 40);
+            this.label1hr.Location = new System.Drawing.Point(193, 39);
             this.label1hr.Name = "label1hr";
             this.label1hr.Size = new System.Drawing.Size(25, 13);
             this.label1hr.TabIndex = 7;
@@ -138,7 +139,7 @@
             // 
             this.labelOther.AutoSize = true;
             this.labelOther.BackColor = System.Drawing.Color.White;
-            this.labelOther.Location = new System.Drawing.Point(242, 53);
+            this.labelOther.Location = new System.Drawing.Point(178, 52);
             this.labelOther.Name = "labelOther";
             this.labelOther.Size = new System.Drawing.Size(41, 13);
             this.labelOther.TabIndex = 8;
@@ -150,7 +151,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(290, 109);
+            this.ClientSize = new System.Drawing.Size(224, 100);
             this.Controls.Add(this.labelOther);
             this.Controls.Add(this.label1hr);
             this.Controls.Add(this.labelWebSite);
@@ -160,11 +161,10 @@
             this.Controls.Add(this.label15min);
             this.Controls.Add(this.label5min);
             this.Controls.Add(this.buttonStartOk);
-            this.MaximumSize = new System.Drawing.Size(298, 138);
-            this.MinimumSize = new System.Drawing.Size(298, 138);
+            this.MaximumSize = new System.Drawing.Size(240, 138);
+            this.MinimumSize = new System.Drawing.Size(240, 138);
             this.Name = "FormMain";
             this.Text = "15minutes v1.1";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,6 +182,7 @@
         private System.Windows.Forms.Label labelWebSite;
         private System.Windows.Forms.Label label1hr;
         private System.Windows.Forms.Label labelOther;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
