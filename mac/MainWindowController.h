@@ -1,10 +1,14 @@
 #import <Cocoa/Cocoa.h>
 
 @class TimeDisplayView;
+@class MyAttachedWindow;
 
 @interface MainWindowController : NSObject {
-	IBOutlet NSMenu *       statusItemMenu_;
-    IBOutlet TimeDisplayView * timeDisplay_;
+	IBOutlet NSMenu *           statusItemMenu_;
+    IBOutlet TimeDisplayView *  timeDisplay_;
+    IBOutlet NSView *           timesUpView_;
+    IBOutlet NSTextField *      timesUpTextField_;
+    MyAttachedWindow *          attachedWindow_;
 
     NSStatusItem *          statusItem_;
 	NSTimer *				timer_;

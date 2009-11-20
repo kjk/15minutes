@@ -1,5 +1,6 @@
 #import "MainWindowController.h"
 #import "TimeDisplayView.h"
+#import "MAAttachedWindow.h"
 
 enum {
     kMenuItemStart5min = 1,
@@ -9,6 +10,29 @@ enum {
     kMenuItemPauseResumeTag = 4,
     kMenuItemStopTag = 5,
 };
+
+@interface NSStatusItem (hack)
+- (NSRect)hackFrame;
+@end
+
+@implementation NSStatusItem (hack)
+- (NSRect)hackFrame
+{
+    return [_fWindow frame];
+}
+@end
+
+@interface MyAttachedWindow : MAAttachedWindow
+- (void)mouseDown:(NSEvent *)theEvent;
+@end
+
+@implementation MyAttachedWindow
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    [super mouseDown:theEvent];
+    [self orderOut:nil];
+}
+@end
 
 @interface MainWindowController (Private)
 
@@ -82,6 +106,17 @@ enum {
 	[statusItem_ setHighlightMode:YES];
 	[statusItem_ setMenu:statusItemMenu_];
 
+    NSRect frm = [statusItem_ hackFrame];
+    NSPoint attachedWindowPos = NSMakePoint(NSMidX(frm), NSMinY(frm));
+    attachedWindowPos.y -= 20; // move down - this is in flipped coordinates
+
+    attachedWindow_ = [[MyAttachedWindow alloc] initWithView:timesUpView_
+                                            attachedToPoint:attachedWindowPos	 
+                                                   inWindow:nil
+                                                      onSide:MAPositionBottom 
+                                                  atDistance:1.0];
+    [timesUpTextField_ setTextColor:[attachedWindow_ borderColor]];
+     
 	[[NSApplication sharedApplication] setDelegate:self];
     [self setMinutes:15];
     [self setStoppedMenuState];
@@ -101,7 +136,8 @@ enum {
     [self stopTimer];
     [self setStoppedMenuState];
     [self startFlashingTimer];
-    [NSApp arrangeInFront:self];
+    [attachedWindow_ makeKeyAndOrderFront:self];
+    [NSApp makeKeyAndOrderFront:self];
 }
 
 - (void)timerFunc {
@@ -175,6 +211,7 @@ enum {
 }
 
 - (IBAction)start5min:(id)sender {
+    //[self setDefaultTime:2];
     [self setMinutes:5];
     [self start:sender];
 }
@@ -217,10 +254,6 @@ enum {
     [self stopTimer];
     [self resetTime];
     [self setStoppedMenuState];
-}
-
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
-	return YES;
 }
 
 @end

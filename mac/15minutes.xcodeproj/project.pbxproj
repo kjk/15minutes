@@ -12,6 +12,7 @@
 		7F3ED61010A6982B0085555B /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F3ED60F10A6982B0085555B /* timer.png */; };
 		7F4D9827109A80C9009E40AA /* 15minutes.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7F4D9826109A80C9009E40AA /* 15minutes.icns */; };
 		7F4D9852109A8336009E40AA /* TimeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D9851109A8336009E40AA /* TimeDisplayView.m */; };
+		7F66938910B6484500EA02D2 /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F66938810B6484500EA02D2 /* MAAttachedWindow.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -32,6 +33,8 @@
 		7F4D9826109A80C9009E40AA /* 15minutes.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = 15minutes.icns; sourceTree = "<group>"; };
 		7F4D9850109A8336009E40AA /* TimeDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeDisplayView.h; sourceTree = "<group>"; };
 		7F4D9851109A8336009E40AA /* TimeDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeDisplayView.m; sourceTree = "<group>"; };
+		7F66938710B6484500EA02D2 /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAttachedWindow.h; sourceTree = "<group>"; };
+		7F66938810B6484500EA02D2 /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAttachedWindow.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* 15minutes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 15minutes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -51,6 +54,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7F66938710B6484500EA02D2 /* MAAttachedWindow.h */,
+				7F66938810B6484500EA02D2 /* MAAttachedWindow.m */,
 				7F3762B10FE1D5BB0060E5BC /* MainWindowController.h */,
 				7F3762B20FE1D5BB0060E5BC /* MainWindowController.m */,
 				7F4D9850109A8336009E40AA /* TimeDisplayView.h */,
@@ -187,6 +192,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				7F3762B30FE1D5BB0060E5BC /* MainWindowController.m in Sources */,
 				7F4D9852109A8336009E40AA /* TimeDisplayView.m in Sources */,
+				7F66938910B6484500EA02D2 /* MAAttachedWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
