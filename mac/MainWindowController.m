@@ -141,7 +141,6 @@ enum {
     [self setStoppedMenuState];
     [self startFlashingTimer];
     [attachedWindow_ makeKeyAndOrderFront:self];
-    [NSApp makeKeyAndOrderFront:self];
 }
 
 - (void)timerFunc {
