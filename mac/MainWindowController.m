@@ -22,15 +22,11 @@ enum {
 }
 @end
 
-@interface MyAttachedWindow : MAAttachedWindow
-- (void)mouseDown:(NSEvent *)theEvent;
-@end
-
 @implementation MyAttachedWindow
 
 - (void)mouseDown:(NSEvent *)theEvent {
     [super mouseDown:theEvent];
-    [self orderOut:nil];
+    [[self delegate] windowMousePressed];
 }
 @end
 
@@ -110,16 +106,24 @@ enum {
     NSPoint attachedWindowPos = NSMakePoint(NSMidX(frm), NSMinY(frm));
     attachedWindowPos.y -= 20; // move down - this is in flipped coordinates
 
-    attachedWindow_ = [[MyAttachedWindow alloc] initWithView:timesUpView_
-                                            attachedToPoint:attachedWindowPos	 
-                                                   inWindow:nil
-                                                      onSide:MAPositionBottom 
-                                                  atDistance:1.0];
+    attachedWindow_ = [MyAttachedWindow alloc];
+    [attachedWindow_ initWithView:timesUpView_
+                  attachedToPoint:attachedWindowPos	 
+                         inWindow:nil
+                           onSide:MAPositionBottom 
+                       atDistance:1.0f];
+    [attachedWindow_ setDelegate:self];
+
     [timesUpTextField_ setTextColor:[attachedWindow_ borderColor]];
      
 	[[NSApplication sharedApplication] setDelegate:self];
     [self setMinutes:15];
     [self setStoppedMenuState];
+}
+
+- (void)windowMousePressed {
+    [attachedWindow_ orderOut:self];
+    flashesRemaining_ = 1; // stop flashing
 }
 
 - (void)dealloc {
@@ -133,7 +137,6 @@ enum {
 }
 
 - (void)finished {
-    [self stopTimer];
     [self setStoppedMenuState];
     [self startFlashingTimer];
     [attachedWindow_ makeKeyAndOrderFront:self];
@@ -160,23 +163,6 @@ enum {
     }
 }
 
-- (void)stopTimer {
-	[timer_ invalidate];
-    timer_ = nil;
-    [startTime_ release];
-    startTime_ = nil;
-}
-
-- (void)startTimer {
-    timer_ = [NSTimer timerWithTimeInterval:0.1f
-                                     target:self
-                                   selector:@selector(timerFunc)
-                                   userInfo:nil
-                                    repeats:YES];
-    startTime_ = [[NSDate date] retain];
-    [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
-}
-
 - (void)flashTimerFunc {
     NSString *timeStr = @"0:00";
     if (0 == (flashesRemaining_ % 2)) {
@@ -193,14 +179,33 @@ enum {
         [self ok:self];
 }
 
+- (void)stopTimer {
+	[timer_ invalidate];
+    timer_ = nil;
+    [startTime_ release];
+    startTime_ = nil;
+}
+
+- (void)startTimer {
+    [self stopTimer];
+    timer_ = [NSTimer timerWithTimeInterval:0.1f
+                                     target:self
+                                   selector:@selector(timerFunc)
+                                   userInfo:nil
+                                    repeats:YES];
+    startTime_ = [[NSDate date] retain];
+    [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
+}
+
 - (void)startFlashingTimer {
+    [self stopTimer];
     timer_ = [NSTimer timerWithTimeInterval:0.5f
                                      target:self
                                    selector:@selector(flashTimerFunc)
                                    userInfo:nil
                                     repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer_ forMode:NSDefaultRunLoopMode];
-    flashesRemaining_ = 24;
+    flashesRemaining_ = 12;
 }
 
 - (IBAction)start:(id)sender {

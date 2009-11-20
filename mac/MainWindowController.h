@@ -1,7 +1,11 @@
 #import <Cocoa/Cocoa.h>
+#import "MAAttachedWindow.h"
 
 @class TimeDisplayView;
-@class MyAttachedWindow;
+
+@interface MyAttachedWindow : MAAttachedWindow
+- (void)mouseDown:(NSEvent *)theEvent;
+@end
 
 @interface MainWindowController : NSObject {
 	IBOutlet NSMenu *           statusItemMenu_;
