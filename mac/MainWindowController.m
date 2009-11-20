@@ -113,6 +113,7 @@ enum {
                            onSide:MAPositionBottom 
                        atDistance:1.0f];
     [attachedWindow_ setDelegate:self];
+    [attachedWindow_ setLevel:NSStatusWindowLevel];
 
     [timesUpTextField_ setTextColor:[attachedWindow_ borderColor]];
      
@@ -216,7 +217,7 @@ enum {
 }
 
 - (IBAction)start5min:(id)sender {
-    //[self setDefaultTime:2];
+    //[self setDefaultTime:5];
     [self setMinutes:5];
     [self start:sender];
 }
